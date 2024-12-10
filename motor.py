@@ -2,8 +2,9 @@ import RPi.GPIO as GPIO
 import time
 import cv2
 import numpy as np
+from PIL import Image
 
-Hertz = 10
+Hertz = 20
 PWMA = 18
 NMA = 17
 
