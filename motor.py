@@ -48,13 +48,13 @@ GPIO.output(NMB, False)
 
 def main():
     picam2 = Picamera2()
-    camera_config = picam2.create_still_configuration(main={"format": 'BGR888',"size": (1920, 1080)}, lores={"size": (160, 120)}, transform=Transform(hflip=True, vflip=True))
+    camera_config = picam2.create_still_configuration(main={"format": 'BGR888',"size": (160, 120)}, lores={"size": (160, 120)}, transform=Transform(hflip=True, vflip=True))
     picam2.configure(camera_config)
     picam2.start_preview(Preview.QTGL)
     picam2.start()
 
     while True:
-        ret,frame = picam2.capture_array("lores")
+        frame = picam2.capture_array("main")
         cv2.imshow('normal',frame)
         
         crop_img =frame[60:120, 0:160]
