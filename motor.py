@@ -75,13 +75,13 @@ def main():
             
             if cx >= 95 and cx <= 125:              
                 print("Turn Left!")
-                motor_left(40)
+                motor_left(50)
             elif cx >= 39 and cx <= 65:
                 print("Turn Right")
-                motor_right(40)
+                motor_right(50)
             else:
                 print("go")
-                motor_go(40)
+                motor_go(50)
         
         if cv2.waitKey(1) == ord('q'):
             break
