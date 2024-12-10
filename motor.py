@@ -5,12 +5,11 @@ from picamera2 import Picamera2, Preview
 from libcamera import Transform
 import numpy as np
 
-Hertz = 20
-PWMA = 18
-NMA = 17
-
-PWMB = 19
-NMB = 16
+Hertz = 100
+PWMA = 12
+NMA = 11
+PWMB = 35
+NMB = 36
 
 def motor_go(speed):
     L_Motor.ChangeDutyCycle(speed)
@@ -29,7 +28,7 @@ def motor_stop():
     R_Motor.ChangeDutyCycle(0)
 
 GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BOARD)
 
 GPIO.setup(PWMA, GPIO.OUT)
 GPIO.setup(NMA, GPIO.OUT)
