@@ -1,8 +1,9 @@
 import RPi.GPIO as GPIO
 import time
 import cv2
+from picamera2 import Picamera2, Preview
+from libcamera import Transform
 import numpy as np
-from PIL import Image
 
 Hertz = 20
 PWMA = 18
@@ -43,14 +44,17 @@ R_Motor = GPIO.PWM(PWMB, Hertz)
 R_Motor.start(0)
 GPIO.output(NMB, False)
 
-def main():
-    camera = cv2.VideoCapture(0)
-    camera.set(3, 160)
-    camera.set(4, 120)
 
-    while(camera.isOpened()):
-        ret, frame = camera.read()
-        frame = cv2.flip(frame,-1)
+
+def main():
+    picam2 = Picamera2()
+    camera_config = picam2.create_still_configuration(main={"format": 'BGR888',"size": (1920, 1080), "transform": Transform(hflip=1, vflip=1)}, cv={"format": 'BGR888',"size": (160, 120), "transform": Transform(hflip=1, vflip=1)})
+    picam2.configure(camera_config)
+    picam2.start_preview(Preview.QTGL)
+    picam2.start()
+
+    while True:
+        ret,frame = picam2.capture_array("cv")
         cv2.imshow('normal',frame)
         
         crop_img =frame[60:120, 0:160]
@@ -87,6 +91,7 @@ def main():
         if cv2.waitKey(1) == ord('q'):
             break
     
+    picam2.stop()
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':
