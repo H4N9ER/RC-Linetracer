@@ -48,7 +48,7 @@ GPIO.output(NMB, False)
 
 def main():
     picam2 = Picamera2()
-    camera_config = picam2.create_still_configuration(main={"format": 'BGR888',"size": (1920, 1080)}, lores={"format": 'BGR888',"size": (160, 120)}, transform=Transform(hflip=True, vflip=True))
+    camera_config = picam2.create_still_configuration(main={"format": 'BGR888',"size": (1920, 1080)}, lores={"size": (160, 120)}, transform=Transform(hflip=True, vflip=True))
     picam2.configure(camera_config)
     picam2.start_preview(Preview.QTGL)
     picam2.start()
