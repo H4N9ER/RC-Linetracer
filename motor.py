@@ -87,8 +87,8 @@ def main():
                 print("go")
                 motor_go(50)
         
-        if cv2.waitKey(1) == ord('q'):
-            break
+            if cv2.waitKey(1) == ord('q'):
+                break
     
     picam2.stop()
     cv2.destroyAllWindows()
