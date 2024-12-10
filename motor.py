@@ -54,7 +54,7 @@ def main():
     picam2.start()
 
     while True:
-        ret,frame = picam2.capture_array("cv")
+        ret,frame = picam2.capture_array("lores")
         cv2.imshow('normal',frame)
         
         crop_img =frame[60:120, 0:160]
